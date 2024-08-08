@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ -d "venv" ]; then
+  echo ''
+else
+  python -m venv venv
+fi
+# check the venv/bin/ folder for other versions of the
+# "activate" script if you are using a nonstandard shell
+#source "venv/bin/activate.fish"
+. venv/bin/activate
+pip install uvicorn starlette[full] pypdf[full]
+cd ambuda_ocr
+uvicorn serve:app --reload
+deactivate
